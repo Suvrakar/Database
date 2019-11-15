@@ -1,0 +1,124 @@
+<html>
+
+<head>
+    <title>Sign up</title>
+    <link href="style2_sign_up.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <header>
+
+        <div class="row">
+            <div class="logo">
+                <img src="logo.png" </div>
+                <ul class="main-nav">
+                    <li class="active"><a href="index.php"> HOME </a></li>
+                    <li><a href="Services.php"> SERVICES </a></li>
+                    <li><a href="Contactus.php"> CONTACT US </a></li>
+                    <li><a href="About.php"> ABOUT </a></li>
+
+                </ul>
+
+            </div>
+
+        </div>
+        <?php
+        session_start();
+        $_SESSION['message'] = '';
+        $mysqli = new mysqli('localhost','root','','wecare1');// path,username, pass, db name
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            //TWO PASSWORDS ARE EQUAL TO EACH OTHER
+            if($_POST['create_pass']==$_POST['con_pass']){
+                $name = $mysqli ->real_escape_string($_POST['name']);
+                $gender = $mysqli ->real_escape_string($_POST['gender']);
+                 $nid = $mysqli ->real_escape_string($_POST['nid']);
+                 $tel_num = $mysqli ->real_escape_string($_POST['tel_num']);
+                 $s_tel_num = $mysqli ->real_escape_string($_POST['s_tel_num']);
+                 $per_add = $mysqli ->real_escape_string($_POST['per_add']);
+                 $pre_add = $mysqli ->real_escape_string($_POST['pre_add']);
+                $mail_id = $mysqli ->real_escape_string($_POST['mail_id']);
+                 $area = $mysqli ->real_escape_string($_POST['area']);
+                $password = md5($_POST['create_pass']);//md5 hash pass security
+                $_SESSION['name'] = $name;
+                $_SESSION['gender'] = $gender;
+                 $_SESSION['nid'] = $nid;
+                 $_SESSION['tel_num'] = $tel_num;
+                 $_SESSION['s_tel_num'] = $s_tel_num;
+                 $_SESSION['per_add'] = $per_add;
+                 $_SESSION['pre_add'] = $pre_add;
+                 $_SESSION['mail_id'] = $mail_id;
+                $_SESSION['area'] = $area;
+                $sql = "insert into user_employee(name,gender,nid,tel_num,s_tel_num,per_add,pre_add,mail_id,area,password) values('$name','$gender','$nid','$tel_num','$s_tel_num','$per_add','$pre_add','$mail_id','$area','$password')";
+                //redirecting to welcome.php if the query is okay
+                if ($mysqli->query($sql) === true) {
+                    $_SESSION['message'] = "Signing up successful! Added username to the database";
+                    header("location: welcome.php");
+                }
+                else{
+                    $_SESSION['message'] = "User could not be added to the database";
+                }
+                
+                
+            }
+            else{
+                $_SESSION['message'] = "Two passwords don't match";
+                
+            }
+            
+        }
+        
+        ?>
+            <div class="container">
+                <form action="signup_cust.php" method="post" enctype="multipart/form-data" autocomplete="off">
+                    <div class="alert alert-error">
+                        <?= $_SESSION['message'] ?>
+                    </div>
+
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name.." required/>
+            <label for="gen">Gender</label>
+            <input type="text" id="gen" name="gender" placeholder="......"required/>
+            <label for="nid">NID</label>
+            <input type="text" id="nid" name="nid" placeholder="......"required/>
+            <label for="tel_num">Telephone Number</label>
+            <input type="text" id="tel_num" name="tel_num" placeholder="......"required/>
+            <label for="s_tel_num">Secondary Telephone Number</label>
+            <input type="text" id="s_tel_num" name="s_tel_num" placeholder="......"required/>
+            <label for="per_add">Permanent Address</label>
+            <input type="text" id="per_add" name="per_add" placeholder="Your permanent address.."required/>
+            <label for="pre_add">Present Address</label>
+            <input type="text" id="pre_add" name="pre_add" placeholder="Your present address.."required/>
+            <label for="mail_id">Email Id</label>
+            <input type="text" id="mail_id" name="mail_id" placeholder="Your mail id.."required/>
+            <label for="area">Preferred Area</label>
+            <input type="text" id="area" name="area" placeholder="Your area.."required/>
+            <label for="create_pass">Create password</label>
+            <input type="password" id="create_pass" name="create_pass" placeholder=" only 6 characters" autocomplete="new-password" required/>
+            <br>
+            </br>
+            <label for="con_pass">Confirm password</label>
+            <input type="password" id="con_pass" name="con_pass" placeholder="confirm password" autocomplete="new-password" required/>
+            <br>
+            </br>
+            <label>
+                </div>
+      <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
+    </label>
+
+            <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+            <div class="clearfix">
+                <button type="button" class="cancelbtn">Cancel</button>
+            </div>
+            <br>
+            </br>
+            <input type="submit" name="sub" value="Sign Up" class="btn btn-block btn-primary" />
+
+            </form>
+            <br>
+</br>
+    </header>
+</body>
+
+</html>
+

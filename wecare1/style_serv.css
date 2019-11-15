@@ -1,0 +1,128 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    font-family: monospace;
+}
+.row
+{
+    max-width: 1200px;
+    margin: auto;
+}
+
+.main-nav
+{
+    float: right;
+    list-style: none;
+    margin-top: 30px;
+}
+.main-nav li
+{
+    display: inline-block;
+}
+
+.main-nav li.active a
+{
+    border: 1px solid black;
+    
+}
+
+.main-nav li a:hover
+{
+    border: 1px solid white;
+}
+
+
+.main-nav li a
+{
+    color: black;
+    text-decoration: none;
+    padding: 5px 20px;
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+}
+
+header
+{
+    background-image:url(images.jpg);
+    height: 350vh;
+    background-size: cover;
+    background-position: center;
+}
+
+
+.logo img
+{
+    width: 100px;
+    height: auto;
+}
+
+.container{
+    width:95%;
+    margin: 0 auto;
+}
+#heading-block{
+    width: 100%;
+    height: auto;
+    float: left;
+    color:darkgreen;
+    font-size: 22px;
+    
+}
+#div_text{
+    width: 100%;
+    height: auto;
+    float: left;
+    color:darkblue;
+    font-size: 24px;
+}
+#heading-block h2{
+    line-height: 35px;
+    border-left: 20px solid darkgreen;
+    padding-left: 10px;
+    
+}
+
+.box{
+    width: 250px;
+    height: 200px;
+    float: left;
+    overflow: hidden;
+    position: relative;
+    margin: 0 20 30;
+     
+}
+
+.box span{
+    width: 100%;
+    height:35px;
+    line-height: 35 px;
+    background: rgba(0,0,0,0.6);
+    bottom: 30px;
+    color: white;
+    display: block;
+    position: absolute;
+    z-index: 999;
+    text-align: center;    
+}
+.box:hover span{
+    color: aqua;
+    
+}
+.box img{
+    max-width: 100%;
+    transition: all .5s ease;
+}
+
+.box:hover img{
+    transform: scale(1.3,1.3);
+    transition: all .5s ease;
+}
+
+
+
+
